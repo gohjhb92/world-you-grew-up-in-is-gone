@@ -98,7 +98,7 @@ function ComparisonVisual() {
   return (
     <div
       ref={frameRef}
-      className="relative min-h-[560px] cursor-ew-resize overflow-hidden rounded-lg border border-paper/12 bg-[#07090b] select-none"
+      className="relative min-h-[520px] cursor-ew-resize overflow-hidden rounded-lg border border-paper/12 bg-[#07090b] select-none"
       onPointerDown={handlePointer}
       onPointerMove={(event) => {
         if (event.buttons === 1) {
@@ -205,18 +205,18 @@ function ComparisonPanel({
         </g>
       </svg>
 
-      <div className="relative z-10 flex min-h-[510px] flex-col justify-between">
-        <div className={cn("max-w-xl", isOld ? "text-left" : "ml-auto text-right")}>
+      <div className="relative z-10 flex min-h-[470px] flex-col justify-between">
+        <div className={cn("w-[44%]", isOld ? "text-left" : "ml-auto text-right")}>
           <p className={cn("micro-label", isOld ? "text-cyan/80" : "text-amber/80")}>{eyebrow}</p>
-          <h3 className="mt-5 font-serif text-4xl leading-none text-paper md:text-6xl">{title}</h3>
+          <h3 className="comparison-title mt-5 text-paper">{title}</h3>
         </div>
 
-        <ul className={cn("grid max-w-lg gap-2", isOld ? "" : "ml-auto")}>
+        <ul className={cn("grid w-[46%] gap-2", isOld ? "" : "ml-auto")}>
           {items.map((item, index) => (
             <motion.li
               key={item}
               className={cn(
-                "flex items-center gap-3 rounded-md border bg-black/22 px-3 py-2.5 text-sm text-paper/82 backdrop-blur",
+                "flex min-h-10 items-center gap-3 rounded-md border bg-black/22 px-3 py-2 text-xs text-paper/82 backdrop-blur md:text-sm",
                 isOld ? "border-cyan/15" : "border-amber/15 flex-row-reverse text-right"
               )}
               initial={{ opacity: 0, y: 10 }}
@@ -293,7 +293,7 @@ function TimelineVisual() {
   ];
 
   return (
-    <div className="relative min-h-[760px] overflow-hidden rounded-lg border border-line bg-[#07090b] p-4 md:p-7">
+    <div className="relative min-h-[720px] overflow-hidden rounded-lg border border-line bg-[#07090b] p-4 md:p-6">
       <div className="absolute inset-0 cinematic-grid opacity-20" />
       <div className="absolute left-[31px] top-8 h-[calc(100%-4rem)] w-px bg-paper/10 md:left-1/2" />
       <motion.div
@@ -395,7 +395,7 @@ function NetworkVisual() {
   const ActiveIcon = active.icon;
 
   return (
-    <div className="grid min-h-[620px] gap-4 lg:grid-cols-[0.92fr_1.08fr]">
+    <div className="grid min-h-[560px] gap-4 lg:grid-cols-[0.92fr_1.08fr]">
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
         {cards.map((card, index) => {
           const Icon = card.icon;
@@ -440,7 +440,7 @@ function NetworkVisual() {
       >
         <div className="absolute inset-0 cinematic-grid opacity-18" />
         <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full border border-amber/12" />
-        <div className="relative flex min-h-[520px] flex-col justify-between">
+        <div className="relative flex min-h-[460px] flex-col justify-between">
           <div>
             <div className="mb-7 flex items-center justify-between gap-4">
               <span className="grid h-14 w-14 place-items-center rounded-md border border-amber/30 bg-amber/10 text-amber">
@@ -448,17 +448,17 @@ function NetworkVisual() {
               </span>
               <span className="micro-label text-amber/80">Strategic Vulnerability</span>
             </div>
-            <h3 className="font-serif text-5xl leading-none text-paper md:text-7xl">{active.title}</h3>
+            <h3 className="module-title text-paper">{active.title}</h3>
           </div>
 
           <div className="space-y-4">
             <div className="rounded-md border border-line bg-black/22 p-4">
               <p className="micro-label mb-3">Dependency</p>
-              <p className="text-base leading-7 text-paper/76">{active.exposure}</p>
+              <p className="text-sm leading-6 text-paper/76 md:text-base md:leading-7">{active.exposure}</p>
             </div>
             <div className="rounded-md border border-danger/20 bg-danger/[.045] p-4">
               <p className="micro-label mb-3 text-danger">Vulnerability</p>
-              <p className="text-base leading-7 text-paper/80">{active.vulnerability}</p>
+              <p className="text-sm leading-6 text-paper/80 md:text-base md:leading-7">{active.vulnerability}</p>
             </div>
           </div>
         </div>
@@ -497,15 +497,15 @@ function TariffVisual() {
   ].map((item) => ({ ...item, value: Math.min(100, Math.max(0, Math.round(item.value))) }));
 
   return (
-    <div className="relative min-h-[560px] overflow-hidden rounded-lg border border-line bg-[#080b0d] p-5 md:p-7">
+    <div className="relative min-h-[520px] overflow-hidden rounded-lg border border-line bg-[#080b0d] p-5 md:p-6">
       <div className="absolute inset-0 cinematic-grid opacity-18" />
       <div className="absolute right-[-12%] top-[-18%] h-72 w-72 rounded-full border border-amber/10" />
 
       <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="flex min-h-[500px] flex-col justify-between">
+        <div className="flex min-h-[460px] flex-col justify-between">
           <div>
             <p className="micro-label text-amber/80">Tariffs as strategic geopolitical tools</p>
-            <h3 className={cn("mt-5 font-serif text-5xl leading-none md:text-7xl", regime.tone)}>{regime.label}</h3>
+            <h3 className={cn("module-title mt-5", regime.tone)}>{regime.label}</h3>
             <p className="mt-5 max-w-sm text-base leading-7 text-paper/68">{regime.summary}</p>
           </div>
 
@@ -663,7 +663,7 @@ function MatrixVisual() {
   const SelectedIcon = selected.icon;
 
   return (
-    <div className="grid min-h-[660px] gap-4 xl:grid-cols-[1fr_0.88fr]">
+    <div className="grid min-h-[580px] gap-4 xl:grid-cols-[1fr_0.86fr]">
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {tools.map((tool, index) => (
           <button
@@ -671,7 +671,7 @@ function MatrixVisual() {
             type="button"
             onClick={() => setActive(index)}
             className={cn(
-              "rounded-md border p-4 text-left transition duration-300",
+              "min-h-32 rounded-md border p-4 text-left transition duration-300",
               active === index
                 ? "border-amber/45 bg-amber/[.075] shadow-[0_0_44px_rgba(242,184,75,.08)]"
                 : "border-line bg-white/[.025] hover:border-paper/25 hover:bg-white/[.045]"
@@ -680,7 +680,7 @@ function MatrixVisual() {
             <div className="mb-5 flex items-center justify-between gap-3">
               <span
                 className={cn(
-                  "grid h-9 w-9 place-items-center rounded-md border",
+                  "grid h-8 w-8 place-items-center rounded-md border",
                   active === index ? "border-amber/30 bg-amber/10 text-amber" : "border-cyan/20 bg-cyan/5 text-cyan"
                 )}
               >
@@ -703,7 +703,7 @@ function MatrixVisual() {
       >
         <div className="absolute inset-0 cinematic-grid opacity-18" />
         <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full border border-cyan/12" />
-        <div className="relative flex min-h-[560px] flex-col justify-between">
+        <div className="relative flex min-h-[500px] flex-col justify-between">
           <div>
             <div className="mb-7 flex items-center justify-between gap-4">
               <span className="grid h-14 w-14 place-items-center rounded-md border border-amber/30 bg-amber/10 text-amber">
@@ -711,17 +711,17 @@ function MatrixVisual() {
               </span>
               <span className="micro-label text-cyan/80">Economic Statecraft Tool</span>
             </div>
-            <h3 className="mt-5 font-serif text-5xl leading-none text-paper md:text-7xl">{selected.name}</h3>
+            <h3 className="module-title mt-5 text-paper">{selected.name}</h3>
             <p className="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-amber">{selected.arena}</p>
           </div>
           <div className="space-y-4">
             <div className="rounded-md border border-line bg-black/22 p-4">
               <p className="micro-label mb-3">Mechanism</p>
-              <p className="text-base leading-7 text-paper/76">{selected.logic}</p>
+              <p className="text-sm leading-6 text-paper/76 md:text-base md:leading-7">{selected.logic}</p>
             </div>
             <div className="rounded-md border border-amber/20 bg-amber/[.045] p-4">
               <p className="micro-label mb-3 text-amber">Strategic Effect</p>
-              <p className="text-base leading-7 text-paper/80">{selected.pressure}</p>
+              <p className="text-sm leading-6 text-paper/80 md:text-base md:leading-7">{selected.pressure}</p>
             </div>
             <div className="rounded-md border border-line bg-white/[.025] p-4">
               <p className="micro-label mb-4">Exposed Layers</p>
@@ -802,11 +802,11 @@ function IndustryVisual() {
   ];
 
   return (
-    <div className="grid min-h-[660px] gap-5 lg:grid-cols-[0.95fr_1.05fr]">
+    <div className="grid min-h-[580px] gap-5 lg:grid-cols-[0.95fr_1.05fr]">
       <div className="relative overflow-hidden rounded-lg border border-line bg-[#080b0d] p-5 md:p-7">
         <div className="absolute inset-0 cinematic-grid opacity-18" />
         <div className="absolute -left-20 bottom-[-120px] h-80 w-80 rounded-full border border-amber/10" />
-        <div className="relative flex min-h-[560px] flex-col justify-between">
+        <div className="relative flex min-h-[500px] flex-col justify-between">
           <div>
             <div className="mb-7 flex items-center justify-between gap-4">
               <span className="grid h-14 w-14 place-items-center rounded-md border border-cyan/25 bg-cyan/10 text-cyan">
@@ -814,14 +814,14 @@ function IndustryVisual() {
               </span>
               <span className="micro-label text-amber/80">Industrial Base</span>
             </div>
-            <h3 className="mt-5 font-serif text-5xl leading-none text-paper md:text-7xl">{selected.name}</h3>
-            <p className="mt-6 text-lg leading-8 text-paper/72">{selected.text}</p>
+            <h3 className="module-title mt-5 text-paper">{selected.name}</h3>
+            <p className="mt-6 text-base leading-7 text-paper/72">{selected.text}</p>
           </div>
 
           <div className="space-y-4">
             <div className="rounded-md border border-line bg-black/22 p-4">
               <p className="micro-label mb-3">What Has To Be Built</p>
-              <p className="text-base leading-7 text-paper/76">{selected.need}</p>
+              <p className="text-sm leading-6 text-paper/76 md:text-base md:leading-7">{selected.need}</p>
             </div>
             <div className="space-y-3 rounded-md border border-line bg-white/[.025] p-4">
               {rebuildStack.map((item) => (
@@ -851,7 +851,7 @@ function IndustryVisual() {
             type="button"
             onClick={() => setActive(index)}
             className={cn(
-              "flex min-h-36 flex-col justify-between rounded-md border p-4 text-left transition duration-300",
+              "flex min-h-32 flex-col justify-between rounded-md border p-4 text-left transition duration-300",
               active === index
                 ? "border-amber/45 bg-amber/[.075]"
                 : "border-line bg-white/[.025] hover:border-paper/25 hover:bg-white/[.045]"
@@ -1216,7 +1216,7 @@ function ScenarioVisual() {
         <div className="absolute right-[-14%] top-[-18%] h-80 w-80 rounded-full border border-amber/12" />
         <div className="relative">
           <p className="micro-label text-amber/80">Future path</p>
-          <h3 className="mt-4 font-serif text-5xl leading-none text-paper md:text-7xl">{active.name}</h3>
+          <h3 className="module-title mt-4 text-paper">{active.name}</h3>
           <p className="mt-6 max-w-2xl text-base leading-7 text-paper/72">{active.description}</p>
 
           <div className="mt-8 grid gap-3 md:grid-cols-2">
@@ -1337,7 +1337,7 @@ function QuizVisual() {
         <div className="relative flex min-h-[500px] flex-col justify-between">
           <div>
             <p className="micro-label text-cyan/80">Strategic Profile</p>
-            <h3 className="mt-5 font-serif text-5xl leading-none text-paper md:text-7xl">{active.profile}</h3>
+            <h3 className="module-title mt-5 text-paper">{active.profile}</h3>
             <p className="mt-6 text-base leading-7 text-paper/74">{active.meaning}</p>
           </div>
 

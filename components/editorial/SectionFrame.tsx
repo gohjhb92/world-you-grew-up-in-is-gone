@@ -95,10 +95,10 @@ export function SectionFrame({
   return (
     <section
       id={id}
-      className="editorial-container grid min-h-screen gap-10 border-t border-paper/8 py-24 md:py-32 lg:grid-cols-[0.82fr_1.18fr] lg:items-center"
+      className="editorial-container grid min-h-screen gap-10 border-t border-paper/8 py-24 md:py-32 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-center"
     >
       <MotionReveal>
-        <div className="max-w-xl">
+        <div className="max-w-lg">
           <div className="mb-8 flex items-center gap-3">
             <span className="grid h-11 w-11 place-items-center rounded-md border border-line bg-white/[.035] text-cyan">
               <Icon size={19} />

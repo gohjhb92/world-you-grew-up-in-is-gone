@@ -79,9 +79,27 @@ select {
 
 .section-title {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.3rem, 6vw, 6.6rem);
+  font-size: clamp(2.35rem, 3.55vw, 4.25rem);
   font-weight: 500;
-  line-height: 0.95;
+  line-height: 0.98;
+  letter-spacing: 0;
+  overflow-wrap: break-word;
+}
+
+.module-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.1rem, 2.55vw, 3.35rem);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: 0;
+  overflow-wrap: break-word;
+}
+
+.comparison-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.25rem, 3.35vw, 4.1rem);
+  font-weight: 500;
+  line-height: 0.96;
   letter-spacing: 0;
 }
 
