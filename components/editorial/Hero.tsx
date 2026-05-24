@@ -24,7 +24,7 @@ export function Hero() {
         >
           <div className="flex items-center gap-3">
             <span className="h-px w-10 bg-paper/45" />
-            <span className="micro-label">Geopolitical Editorial</span>
+            <span className="micro-label">Geopolitical editorial</span>
           </div>
           <span className="micro-label hidden text-paper/45 sm:inline">Scroll to enter the new order</span>
         </motion.header>
@@ -58,7 +58,7 @@ export function Hero() {
               The End of the Liberal World Order
             </p>
             <div className="hidden max-w-sm border-l border-paper/18 pl-5 text-sm leading-6 text-muted md:block">
-              <span className="micro-label mb-3 block text-amber/80">Opening Frame</span>
+              <span className="micro-label mb-3 block text-amber/80">Opening frame</span>
               <span>
                 Free trade, cheap goods, just-in-time supply chains, open markets, and American unipolar power were
                 not the end of history. They were a temporary settlement.

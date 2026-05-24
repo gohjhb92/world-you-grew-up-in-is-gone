@@ -109,7 +109,7 @@ function ComparisonVisual() {
       <ComparisonPanel
         tone="old"
         eyebrow="The World You Were Promised"
-        title="Old Liberal Order"
+        title="Old liberal order"
         items={[
           "free trade",
           "cheap goods",
@@ -125,7 +125,7 @@ function ComparisonVisual() {
         <ComparisonPanel
           tone="new"
           eyebrow="The World That Is Emerging"
-          title="Emerging Fragmented Order"
+        title="Emerging fragmented order"
           items={[
             "tariffs",
             "protectionism",
@@ -150,9 +150,9 @@ function ComparisonVisual() {
       </motion.div>
 
       <div className="pointer-events-none absolute inset-x-5 bottom-5 z-30 flex items-center justify-between gap-4">
-        <span className="micro-label text-cyan/80">Old Order</span>
+        <span className="micro-label text-cyan/80">Old order</span>
         <span className="h-px flex-1 bg-paper/12" />
-        <span className="micro-label text-amber/80">Emerging Order</span>
+        <span className="micro-label text-amber/80">Emerging order</span>
       </div>
     </div>
   );
@@ -244,25 +244,25 @@ function TimelineVisual() {
     },
     {
       year: "1971",
-      title: "Nixon Shock",
+      title: "Nixon shock",
       text: "The gold link breaks; monetary order becomes more flexible, more financialized, and more political.",
       icon: Banknote
     },
     {
       year: "1991",
-      title: "Soviet Collapse",
+      title: "Soviet collapse",
       text: "American primacy becomes the organizing fact of global politics.",
       icon: ShieldAlert
     },
     {
       year: "2001",
-      title: "China Joins WTO",
+      title: "China joins WTO",
       text: "Globalization accelerates as manufacturing, capital, and supply chains reorganize around China.",
       icon: Factory
     },
     {
       year: "2008",
-      title: "Global Financial Crisis",
+      title: "Global financial crisis",
       text: "The system survives, but its legitimacy is permanently damaged.",
       icon: TrendingDown
     },
@@ -274,19 +274,19 @@ function TimelineVisual() {
     },
     {
       year: "2020",
-      title: "COVID Supply Chain Shock",
+      title: "COVID supply chain shock",
       text: "Just-in-time efficiency reveals itself as strategic fragility.",
       icon: PackageOpen
     },
     {
       year: "2022",
-      title: "Russia Invades Ukraine",
+      title: "Russia invades Ukraine",
       text: "Energy, sanctions, food, and finance become weapons of geopolitical conflict.",
       icon: Siren
     },
     {
       year: "2025+",
-      title: "Tariff Nationalism",
+      title: "Tariff nationalism",
       text: "Tariffs and industrial policy move from exception to operating system.",
       icon: Waves
     }
@@ -446,7 +446,7 @@ function NetworkVisual() {
               <span className="grid h-14 w-14 place-items-center rounded-md border border-amber/30 bg-amber/10 text-amber">
                 <ActiveIcon size={24} />
               </span>
-              <span className="micro-label text-amber/80">Strategic Vulnerability</span>
+              <span className="micro-label text-amber/80">Strategic vulnerability</span>
             </div>
             <h3 className="module-title text-paper">{active.title}</h3>
           </div>
@@ -593,7 +593,7 @@ function MatrixVisual() {
       pressure: "Raises the cost of rival supply, changes corporate routing, and gives the state a visible bargaining instrument."
     },
     {
-      name: "Export Controls",
+      name: "Export controls",
       icon: Cpu,
       arena: "Technology denial",
       logic: "Advanced chips, tools, software, and technical services are restricted when they could strengthen a rival's military or AI capability.",
@@ -607,42 +607,42 @@ function MatrixVisual() {
       pressure: "Creates a shadow price for geopolitical alignment and pushes rivals to build parallel financial plumbing."
     },
     {
-      name: "Capital Screening",
+      name: "Capital screening",
       icon: ShieldAlert,
       arena: "Financial perimeter",
       logic: "Inbound and outbound investment is filtered for security exposure, sensitive data, critical infrastructure, and strategic technology leakage.",
       pressure: "Moves capital from a neutral flow into a screened channel where ownership, control, and destination matter."
     },
     {
-      name: "Defense Procurement",
+      name: "Defense procurement",
       icon: Factory,
       arena: "Industrial mobilization",
       logic: "The state pulls private capital toward munitions, shipbuilding, drones, rare-earth magnets, cyber tools, and defense technology.",
       pressure: "Procurement becomes a demand signal: what the state buys, the industrial base learns to build."
     },
     {
-      name: "Energy Policy",
+      name: "Energy policy",
       icon: Waves,
       arena: "Power politics",
       logic: "Oil, gas, LNG, nuclear, grid capacity, and fuel security become tools of domestic strength and alliance leverage.",
       pressure: "Abundant energy lowers industrial costs, supports allies, and limits the coercive power of hostile suppliers."
     },
     {
-      name: "Critical Minerals",
+      name: "Critical minerals",
       icon: Gem,
       arena: "Resource security",
       logic: "Rare earths, copper, lithium, uranium, magnets, and refining capacity move from commodity logic into strategic stockpiles and offtake deals.",
       pressure: "The constraint shifts from price to availability: the question becomes who can guarantee supply in a crisis."
     },
     {
-      name: "AI Infrastructure",
+      name: "AI infrastructure",
       icon: FlaskConical,
       arena: "Digital sovereignty",
       logic: "Compute, cloud, chips, data centers, cooling, electricity, and model access become the next national capability stack.",
       pressure: "AI power depends on physical inputs. Compute is no longer just a business resource; it is strategic capacity."
     },
     {
-      name: "Industrial Finance",
+      name: "Industrial finance",
       icon: PackageOpen,
       arena: "Directed capital",
       logic: "Loans, guarantees, tax credits, procurement, and public-private funds are used to rebuild capacity that markets alone underbuilt.",
@@ -689,7 +689,7 @@ function MatrixVisual() {
               <span className="font-mono text-[11px] text-muted">{String(index + 1).padStart(2, "0")}</span>
             </div>
             <p className="text-sm font-semibold text-paper">{tool.name}</p>
-            <p className="mt-2 font-mono text-[11px] uppercase text-muted">{tool.arena}</p>
+            <p className="mt-2 font-mono text-[11px] text-muted">{tool.arena}</p>
           </button>
         ))}
       </div>
@@ -709,10 +709,10 @@ function MatrixVisual() {
               <span className="grid h-14 w-14 place-items-center rounded-md border border-amber/30 bg-amber/10 text-amber">
                 <SelectedIcon size={23} />
               </span>
-              <span className="micro-label text-cyan/80">Economic Statecraft Tool</span>
+              <span className="micro-label text-cyan/80">Economic statecraft tool</span>
             </div>
             <h3 className="module-title mt-5 text-paper">{selected.name}</h3>
-            <p className="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-amber">{selected.arena}</p>
+            <p className="mt-4 font-mono text-xs text-amber">{selected.arena}</p>
           </div>
           <div className="space-y-4">
             <div className="rounded-md border border-line bg-black/22 p-4">
@@ -720,11 +720,11 @@ function MatrixVisual() {
               <p className="text-sm leading-6 text-paper/76 md:text-base md:leading-7">{selected.logic}</p>
             </div>
             <div className="rounded-md border border-amber/20 bg-amber/[.045] p-4">
-              <p className="micro-label mb-3 text-amber">Strategic Effect</p>
+              <p className="micro-label mb-3 text-amber">Strategic effect</p>
               <p className="text-sm leading-6 text-paper/80 md:text-base md:leading-7">{selected.pressure}</p>
             </div>
             <div className="rounded-md border border-line bg-white/[.025] p-4">
-              <p className="micro-label mb-4">Exposed Layers</p>
+              <p className="micro-label mb-4">Exposed layers</p>
               <div className="flex flex-wrap gap-2">
                 {exposedLayers.map((layer) => (
                   <span key={layer} className="rounded border border-paper/10 bg-black/20 px-2.5 py-1.5 text-xs text-paper/72">
@@ -744,14 +744,14 @@ function IndustryVisual() {
   const [active, setActive] = useState(0);
   const pillars = [
     {
-      name: "CHIPS and Fabs",
+      name: "CHIPS and fabs",
       icon: Cpu,
       text: "Domestic and allied semiconductor capacity becomes the anchor of AI, defense, autos, cloud, and industrial resilience.",
       need: "Subsidies, skilled labor, power, water, advanced tools, trusted packaging.",
       signal: "critical"
     },
     {
-      name: "Energy Buildout",
+      name: "Energy buildout",
       icon: Waves,
       text: "Abundant power, LNG, nuclear, and grid buildout become strategic advantages rather than background utilities.",
       need: "Transmission, baseload power, gas logistics, nuclear supply chains, permitting speed.",
@@ -765,28 +765,28 @@ function IndustryVisual() {
       signal: "strained"
     },
     {
-      name: "Critical Minerals",
+      name: "Critical minerals",
       icon: Gem,
       text: "Mining, processing, magnets, and offtake agreements shift from commodity logic to national capability logic.",
       need: "Processing, refining, stockpiles, allied mines, guaranteed demand, faster approvals.",
       signal: "rising"
     },
     {
-      name: "Defense Base",
+      name: "Defense base",
       icon: ShieldAlert,
       text: "Munitions, drones, air defense, missiles, and procurement reform become central to industrial policy.",
       need: "Surge capacity, predictable orders, supplier depth, dual-use factories, inventory rebuild.",
       signal: "critical"
     },
     {
-      name: "Automation and Robotics",
+      name: "Automation and robotics",
       icon: Factory,
       text: "Robotics and industrial AI offset labor scarcity and make high-cost domestic production more viable.",
       need: "Robots, machine vision, industrial AI, technician pipelines, software-defined factories.",
       signal: "rising"
     },
     {
-      name: "North American Corridor",
+      name: "North American corridor",
       icon: RadioTower,
       text: "Mexico, US logistics, border infrastructure, ports, rail, and energy systems become one strategic manufacturing zone.",
       need: "Permitting, customs capacity, secure transport, power, workforce, harmonized supplier networks.",
@@ -812,7 +812,7 @@ function IndustryVisual() {
               <span className="grid h-14 w-14 place-items-center rounded-md border border-cyan/25 bg-cyan/10 text-cyan">
                 <SelectedIcon size={23} />
               </span>
-              <span className="micro-label text-amber/80">Industrial Base</span>
+              <span className="micro-label text-amber/80">Industrial base</span>
             </div>
             <h3 className="module-title mt-5 text-paper">{selected.name}</h3>
             <p className="mt-6 text-base leading-7 text-paper/72">{selected.text}</p>
@@ -820,7 +820,7 @@ function IndustryVisual() {
 
           <div className="space-y-4">
             <div className="rounded-md border border-line bg-black/22 p-4">
-              <p className="micro-label mb-3">What Has To Be Built</p>
+              <p className="micro-label mb-3">What has to be built</p>
               <p className="text-sm leading-6 text-paper/76 md:text-base md:leading-7">{selected.need}</p>
             </div>
             <div className="space-y-3 rounded-md border border-line bg-white/[.025] p-4">
@@ -828,7 +828,7 @@ function IndustryVisual() {
                 <div key={item.label}>
                   <div className="mb-2 flex items-center justify-between gap-4">
                     <span className="text-xs capitalize text-paper/72">{item.label}</span>
-                    <span className="font-mono text-[11px] uppercase text-muted">conceptual</span>
+                    <span className="font-mono text-[11px] text-muted">conceptual</span>
                   </div>
                   <div className="h-2 overflow-hidden rounded-full bg-white/8">
                     <motion.div
@@ -866,7 +866,7 @@ function IndustryVisual() {
               >
                 <pillar.icon size={16} />
               </span>
-              <span className="font-mono text-[11px] uppercase text-muted">{pillar.signal}</span>
+              <span className="font-mono text-[11px] text-muted">{pillar.signal}</span>
             </div>
             <span className="text-sm font-semibold text-paper">{pillar.name}</span>
           </button>
@@ -998,7 +998,7 @@ function MapVisual() {
             </span>
             <span className="micro-label text-amber/80">Hotspot</span>
           </div>
-          <h3 className="font-serif text-4xl leading-none text-paper">{active.name}</h3>
+          <h3 className="module-title text-paper">{active.name}</h3>
           <p className="mt-5 text-sm leading-7 text-paper/72">{active.why}</p>
           <div className="mt-7 space-y-2">
             {hotspots.map((hotspot) => (
@@ -1041,8 +1041,8 @@ function BlocVisual() {
       <div className="absolute inset-0 cinematic-grid opacity-20" />
       <div className="relative mb-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="micro-label text-amber/80">One World Becomes Many</p>
-          <h3 className="mt-2 font-serif text-4xl leading-none text-paper md:text-5xl">Bloc Fragmentation</h3>
+          <p className="micro-label text-amber/80">One world becomes many</p>
+          <h3 className="module-title mt-2 text-paper">Bloc fragmentation</h3>
         </div>
         <div className="grid grid-cols-3 gap-2 rounded-md border border-line bg-black/24 p-1">
           {(["1995", "2026", "2035"] as const).map((item) => (
@@ -1133,7 +1133,7 @@ function BlocVisual() {
 function ScenarioVisual() {
   const scenarios = [
     {
-      name: "Cold Peace",
+      name: "Cold peace",
       description: "Major powers avoid direct war, but the world settles into durable rivalry, controlled decoupling, and permanent strategic suspicion.",
       winners: ["defense technology", "trusted suppliers", "cybersecurity"],
       losers: ["borderless platforms", "low-margin importers", "rules-only diplomacy"],
@@ -1141,7 +1141,7 @@ function ScenarioVisual() {
       watch: ["export controls", "defense budgets", "Taiwan deterrence signals"]
     },
     {
-      name: "Fragmented Globalization",
+      name: "Fragmented globalization",
       description: "Trade continues, but it routes through blocs, trusted corridors, regional agreements, and politically screened supply chains.",
       winners: ["Mexico", "India", "logistics software"],
       losers: ["single-source manufacturers", "pure cost optimizers", "fragile shipping models"],
@@ -1149,7 +1149,7 @@ function ScenarioVisual() {
       watch: ["friend-shoring deals", "customs data", "regional trade corridors"]
     },
     {
-      name: "Taiwan Shock",
+      name: "Taiwan shock",
       description: "A severe Taiwan crisis forces markets, governments, and companies to price the fragility of the advanced chip supply chain overnight.",
       winners: ["domestic fabs", "defense primes", "resilience planners"],
       losers: ["consumer electronics", "automakers", "high-beta tech"],
@@ -1157,7 +1157,7 @@ function ScenarioVisual() {
       watch: ["PLA exercises", "chip inventories", "US-Japan posture"]
     },
     {
-      name: "Commodity Supercycle",
+      name: "Commodity supercycle",
       description: "Reindustrialization, electrification, defense demand, and infrastructure duplication collide with constrained commodity supply.",
       winners: ["copper", "uranium", "critical minerals"],
       losers: ["energy importers", "underbuilt grids", "commodity-short manufacturers"],
@@ -1173,7 +1173,7 @@ function ScenarioVisual() {
       watch: ["tariff policy", "Mexico capacity", "shipbuilding and grid spend"]
     },
     {
-      name: "Multipolar Disorder",
+      name: "Multipolar disorder",
       description: "No power can impose order, institutions weaken, and regional crises interact through energy, food, migration, cyber, and finance.",
       winners: ["hard assets", "security states", "strategic autonomy players"],
       losers: ["small open economies", "fragile importers", "unhedged multinationals"],
@@ -1296,8 +1296,8 @@ function QuizVisual() {
     <div className="grid min-h-[560px] gap-4 lg:grid-cols-[0.92fr_1.08fr]">
       <div className="space-y-3">
         <div className="rounded-md border border-amber/20 bg-amber/[.055] p-5">
-          <p className="micro-label text-amber/80">Positioning Question</p>
-          <h3 className="mt-4 font-serif text-3xl leading-tight text-paper md:text-4xl">
+          <p className="micro-label text-amber/80">Positioning question</p>
+          <h3 className="mt-4 font-serif text-2xl leading-tight text-paper md:text-3xl">
             Which dependency defines your exposure?
           </h3>
         </div>
@@ -1336,13 +1336,13 @@ function QuizVisual() {
         <div className="absolute inset-0 cinematic-grid opacity-18" />
         <div className="relative flex min-h-[500px] flex-col justify-between">
           <div>
-            <p className="micro-label text-cyan/80">Strategic Profile</p>
+            <p className="micro-label text-cyan/80">Strategic profile</p>
             <h3 className="module-title mt-5 text-paper">{active.profile}</h3>
             <p className="mt-6 text-base leading-7 text-paper/74">{active.meaning}</p>
           </div>
 
           <div className="rounded-md border border-line bg-black/24 p-4">
-            <p className="micro-label mb-4">Signals To Watch</p>
+            <p className="micro-label mb-4">Signals to watch</p>
             <ul className="space-y-3">
               {active.watch.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm leading-5 text-paper/76">

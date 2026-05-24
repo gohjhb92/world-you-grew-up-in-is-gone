@@ -20,13 +20,13 @@ export function ClosingScaffold() {
         <div aria-hidden className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#050607] to-transparent" />
 
         <div className="editorial-container relative z-10 py-24">
-          <p className="micro-label mb-12 text-amber/80">11 / Closing Manifesto</p>
+          <p className="micro-label mb-12 text-amber/80">11 / Closing manifesto</p>
 
           <div className="space-y-8 md:space-y-10">
             {lines.map((line, index) => (
               <motion.p
                 key={line}
-                className="max-w-5xl font-serif text-3xl leading-tight text-paper/72 md:text-6xl"
+                className="max-w-5xl font-serif text-3xl leading-tight text-paper/72 md:text-5xl"
                 initial={{ opacity: 0, y: 34, filter: "blur(10px)" }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, amount: 0.78 }}
@@ -44,7 +44,7 @@ export function ClosingScaffold() {
             viewport={{ once: true, amount: 0.72 }}
             transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="font-serif text-5xl leading-none text-amber md:text-8xl">History has returned.</p>
+            <p className="font-serif text-5xl leading-none text-amber md:text-7xl">History has returned.</p>
           </motion.div>
 
           <motion.div
@@ -54,7 +54,7 @@ export function ClosingScaffold() {
             viewport={{ once: true, amount: 0.72 }}
             transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="max-w-6xl font-serif text-6xl leading-[0.9] text-paper md:text-[8.8rem]">
+            <p className="max-w-6xl font-serif text-5xl leading-[0.92] text-paper md:text-[7.2rem]">
               The world you grew up in is gone.
             </p>
           </motion.div>
