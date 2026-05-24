@@ -1,0 +1,11 @@
+.next/
+out/
+node_modules/
+
+*.log
+*.png
+
+.env
+.env.*
+
+!.env.example
