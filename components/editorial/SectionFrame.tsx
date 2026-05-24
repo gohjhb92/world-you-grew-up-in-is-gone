@@ -73,7 +73,7 @@ const sectionNarrative: Record<string, { label: string; heading: string; intro: 
     heading: "Where Do You Stand In The New Order?",
     intro:
       "A fragmented world does not punish everyone equally. It rewards some positions, exposes others, and forces companies, investors, and countries to decide which dependencies they can afford.",
-    note: "This placeholder is ready for a later interactive diagnostic."
+    note: "Choose the exposure that most resembles your position and see how the new order reframes it."
   }
 };
 
