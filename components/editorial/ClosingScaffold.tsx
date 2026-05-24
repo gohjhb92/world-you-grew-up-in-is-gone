@@ -1,27 +1,65 @@
-import { Flag } from "lucide-react";
-import { MotionReveal } from "@/components/editorial/MotionReveal";
-import { PlaceholderLines } from "@/components/editorial/Placeholder";
-import { SectionVisual } from "@/components/editorial/SectionVisual";
+"use client";
+
+import { motion } from "framer-motion";
 
 export function ClosingScaffold() {
-  return (
-    <section id="closing-manifesto" className="editorial-container grid min-h-screen gap-10 border-t border-paper/8 py-24 md:py-32 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
-      <MotionReveal>
-        <div className="max-w-5xl">
-          <div className="mb-8 flex items-center gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-md border border-amber/30 bg-amber/10 text-amber">
-              <Flag size={19} />
-            </span>
-            <span className="micro-label">11 / Closing Manifesto</span>
-          </div>
-          <h2 className="section-title">Closing Manifesto</h2>
-          <PlaceholderLines className="mt-10 max-w-3xl" lines={6} />
-        </div>
-      </MotionReveal>
+  const lines = [
+    "The world you grew up in taught you trade would bring peace.",
+    "That borders would matter less.",
+    "That supply chains would always optimize.",
+    "That democracy would expand.",
+    "That America would remain unchallenged.",
+    "That history had ended."
+  ];
 
-      <MotionReveal>
-        <SectionVisual visual="manifesto" title="Closing Manifesto" />
-      </MotionReveal>
+  return (
+    <section id="closing-manifesto" className="relative min-h-[320vh] border-t border-paper/8">
+      <div className="sticky top-0 flex min-h-screen items-center overflow-hidden bg-[#050607]">
+        <div aria-hidden className="absolute inset-0 cinematic-grid opacity-20" />
+        <div aria-hidden className="absolute left-1/2 top-1/2 h-[70vw] max-h-[920px] min-h-[440px] w-[70vw] min-w-[440px] max-w-[920px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-paper/8" />
+        <div aria-hidden className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#050607] to-transparent" />
+
+        <div className="editorial-container relative z-10 py-24">
+          <p className="micro-label mb-12 text-amber/80">11 / Closing Manifesto</p>
+
+          <div className="space-y-8 md:space-y-10">
+            {lines.map((line, index) => (
+              <motion.p
+                key={line}
+                className="max-w-5xl font-serif text-3xl leading-tight text-paper/72 md:text-6xl"
+                initial={{ opacity: 0, y: 34, filter: "blur(10px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, amount: 0.78 }}
+                transition={{ duration: 0.9, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {line}
+              </motion.p>
+            ))}
+          </div>
+
+          <motion.div
+            className="mt-20 border-t border-paper/14 pt-12 md:mt-28 md:pt-16"
+            initial={{ opacity: 0, y: 44 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.72 }}
+            transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="font-serif text-5xl leading-none text-amber md:text-8xl">History has returned.</p>
+          </motion.div>
+
+          <motion.div
+            className="mt-20 md:mt-28"
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.72 }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="max-w-6xl font-serif text-6xl leading-[0.9] text-paper md:text-[8.8rem]">
+              The world you grew up in is gone.
+            </p>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
