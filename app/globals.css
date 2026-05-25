@@ -190,3 +190,43 @@ select {
   background: #080b0d;
   box-shadow: 0 0 0 6px rgba(242, 184, 75, 0.12), 0 12px 28px rgba(0, 0, 0, 0.45);
 }
+
+.comparison-range {
+  width: 100%;
+  height: 32px;
+  appearance: none;
+  background: transparent;
+  cursor: ew-resize;
+}
+
+.comparison-range::-webkit-slider-runnable-track {
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(96, 213, 220, 0.78), rgba(238, 242, 237, 0.18) 50%, rgba(242, 184, 75, 0.78));
+}
+
+.comparison-range::-webkit-slider-thumb {
+  width: 30px;
+  height: 30px;
+  margin-top: -14px;
+  appearance: none;
+  border: 1px solid rgba(238, 242, 237, 0.32);
+  border-radius: 999px;
+  background: #080b0d;
+  box-shadow: inset 0 0 0 8px rgba(238, 242, 237, 0.04), 0 10px 28px rgba(0, 0, 0, 0.44);
+}
+
+.comparison-range::-moz-range-track {
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(96, 213, 220, 0.78), rgba(238, 242, 237, 0.18) 50%, rgba(242, 184, 75, 0.78));
+}
+
+.comparison-range::-moz-range-thumb {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(238, 242, 237, 0.32);
+  border-radius: 999px;
+  background: #080b0d;
+  box-shadow: inset 0 0 0 8px rgba(238, 242, 237, 0.04), 0 10px 28px rgba(0, 0, 0, 0.44);
+}

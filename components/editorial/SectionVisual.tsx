@@ -1,19 +1,23 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
-import type { PointerEvent } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import countries from "world-atlas/countries-110m.json";
 import {
+  ArrowRight,
   Banknote,
-  ChevronsLeftRight,
+  BarChart3,
+  CircleDollarSign,
+  Coins,
   Cpu,
   FlaskConical,
   Gem,
   Factory,
+  Globe2,
   Leaf,
   Landmark,
+  LockKeyhole,
   Pill,
   PackageOpen,
   RadioTower,
@@ -21,7 +25,9 @@ import {
   Siren,
   Ship,
   TrendingDown,
+  TrendingUp,
   Vote,
+  WalletCards,
   Waves
 } from "lucide-react";
 import type { EditorialSection } from "@/content/sections";
@@ -41,6 +47,8 @@ export function SectionVisual({
     network: "Select a dependency layer",
     tariffs: "Adjust the policy posture",
     matrix: "Select a statecraft lever",
+    grandmacro: "Switch the measurement lens",
+    digitaldollar: "Trace dollar demand on new rails",
     industry: "Select an industrial pillar",
     map: "Hover a strategic chokepoint",
     blocs: "Toggle the world map",
@@ -62,6 +70,8 @@ export function SectionVisual({
         {visual === "network" && <NetworkVisual />}
         {visual === "tariffs" && <TariffVisual />}
         {visual === "matrix" && <MatrixVisual />}
+        {visual === "grandmacro" && <GrandMacroVisual />}
+        {visual === "digitaldollar" && <DigitalDollarVisual />}
         {visual === "industry" && <IndustryVisual />}
         {visual === "map" && <MapVisual />}
         {visual === "blocs" && <BlocVisual />}
@@ -75,57 +85,57 @@ export function SectionVisual({
 
 function ComparisonVisual() {
   const [split, setSplit] = useState(50);
-  const frameRef = useRef<HTMLDivElement>(null);
-
-  const updateSplit = useCallback((clientX: number) => {
-    const frame = frameRef.current;
-    if (!frame) {
-      return;
-    }
-
-    const rect = frame.getBoundingClientRect();
-    const next = ((clientX - rect.left) / rect.width) * 100;
-    setSplit(Math.min(88, Math.max(12, next)));
-  }, []);
-
-  const handlePointer = useCallback(
-    (event: PointerEvent<HTMLDivElement>) => {
-      updateSplit(event.clientX);
-    },
-    [updateSplit]
-  );
+  const oldFocus = 100 - split;
+  const emergingFocus = split;
+  const posture = split < 40 ? "Old order in focus" : split > 60 ? "Emerging order in focus" : "Orders in tension";
 
   return (
-    <div
-      ref={frameRef}
-      className="relative min-h-[520px] cursor-ew-resize overflow-hidden rounded-lg border border-paper/12 bg-[#07090b] select-none"
-      onPointerDown={handlePointer}
-      onPointerMove={(event) => {
-        if (event.buttons === 1) {
-          handlePointer(event);
-        }
-      }}
-    >
-      <ComparisonPanel
-        tone="old"
-        eyebrow="The World You Were Promised"
-        title="Old liberal order"
-        items={[
-          "free trade",
-          "cheap goods",
-          "globalization",
-          "open markets",
-          "American-led security",
-          "supply chain efficiency",
-          "expanding democracy"
-        ]}
-      />
+    <div className="relative overflow-hidden rounded-lg border border-paper/12 bg-[#07090b] p-4 md:p-5">
+      <div className="absolute inset-0 cinematic-grid opacity-20" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_28%,rgba(96,213,220,.10),transparent_30%),radial-gradient(circle_at_78%_30%,rgba(242,184,75,.11),transparent_31%)]" />
 
-      <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 0 0 ${split}%)` }}>
+      <div className="relative mb-4 rounded-md border border-paper/10 bg-black/30 p-4">
+        <div className="mb-4 grid grid-cols-3 items-center gap-2">
+          <span className="micro-label text-cyan/80">Old order</span>
+          <span className="micro-label text-center text-paper/56">{posture}</span>
+          <span className="micro-label text-right text-amber/80">Emerging order</span>
+        </div>
+        <label className="block">
+          <span className="sr-only">Shift focus between old order and emerging order</span>
+          <input
+            aria-label="Shift comparison focus"
+            type="range"
+            className="comparison-range"
+            min="0"
+            max="100"
+            value={split}
+            onChange={(event) => setSplit(Number(event.target.value))}
+          />
+        </label>
+      </div>
+
+      <div className="relative grid gap-4 lg:grid-cols-2">
+        <ComparisonPanel
+          tone="old"
+          eyebrow="The world you were promised"
+          title="Old liberal order"
+          focus={oldFocus}
+          items={[
+            "free trade",
+            "cheap goods",
+            "globalization",
+            "open markets",
+            "American-led security",
+            "supply chain efficiency",
+            "expanding democracy"
+          ]}
+        />
+
         <ComparisonPanel
           tone="new"
-          eyebrow="The World That Is Emerging"
-        title="Emerging fragmented order"
+          eyebrow="The world that is emerging"
+          title="Emerging fragmented order"
+          focus={emergingFocus}
           items={[
             "tariffs",
             "protectionism",
@@ -138,21 +148,11 @@ function ComparisonVisual() {
         />
       </div>
 
-      <motion.div
-        className="absolute inset-y-0 z-20 w-px bg-paper/70"
-        style={{ left: `${split}%` }}
-        animate={{ opacity: [0.72, 1, 0.72] }}
-        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="absolute left-1/2 top-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-paper/25 bg-[#080b0d]/95 shadow-[0_18px_60px_rgba(0,0,0,.45)] backdrop-blur">
-          <ChevronsLeftRight size={19} className="text-paper/80" />
-        </div>
-      </motion.div>
-
-      <div className="pointer-events-none absolute inset-x-5 bottom-5 z-30 flex items-center justify-between gap-4">
-        <span className="micro-label text-cyan/80">Old order</span>
-        <span className="h-px flex-1 bg-paper/12" />
-        <span className="micro-label text-amber/80">Emerging order</span>
+      <div className="relative mt-4 flex items-center justify-between gap-4">
+        <span className="text-xs text-paper/52">
+          The comparison remains visible while the emphasis shifts.
+        </span>
+        <span className="micro-label text-paper/48">{split}% emerging</span>
       </div>
     </div>
   );
@@ -162,21 +162,29 @@ function ComparisonPanel({
   tone,
   eyebrow,
   title,
+  focus,
   items
 }: {
   tone: "old" | "new";
   eyebrow: string;
   title: string;
+  focus: number;
   items: string[];
 }) {
   const isOld = tone === "old";
 
   return (
-    <div
+    <motion.div
       className={cn(
-        "absolute inset-0 overflow-hidden p-5 md:p-8",
-        isOld ? "bg-[#071012]" : "bg-[#120b09]"
+        "relative overflow-hidden rounded-md border p-5 md:p-6 lg:min-h-[520px]",
+        isOld ? "border-cyan/18 bg-cyan/[.035]" : "border-amber/18 bg-amber/[.035]"
       )}
+      animate={{
+        borderColor: isOld
+          ? `rgba(96,213,220,${0.13 + focus / 310})`
+          : `rgba(242,184,75,${0.13 + focus / 310})`
+      }}
+      transition={{ duration: 0.28 }}
     >
       <div
         className={cn(
@@ -205,23 +213,26 @@ function ComparisonPanel({
         </g>
       </svg>
 
-      <div className="relative z-10 flex min-h-[470px] flex-col justify-between">
-        <div className={cn("w-[44%]", isOld ? "text-left" : "ml-auto text-right")}>
+      <motion.div
+        className="relative z-10 flex flex-col justify-between gap-8 lg:min-h-[468px]"
+        animate={{ opacity: 0.62 + focus / 265 }}
+        transition={{ duration: 0.28 }}
+      >
+        <div className={cn(isOld ? "text-left" : "text-right")}>
           <p className={cn("micro-label", isOld ? "text-cyan/80" : "text-amber/80")}>{eyebrow}</p>
           <h3 className="comparison-title mt-5 text-paper">{title}</h3>
         </div>
 
-        <ul className={cn("grid w-[46%] gap-2", isOld ? "" : "ml-auto")}>
+        <ul className="grid gap-2">
           {items.map((item, index) => (
             <motion.li
               key={item}
               className={cn(
                 "flex min-h-10 items-center gap-3 rounded-md border bg-black/22 px-3 py-2 text-xs text-paper/82 backdrop-blur md:text-sm",
-                isOld ? "border-cyan/15" : "border-amber/15 flex-row-reverse text-right"
+                isOld ? "border-cyan/16" : "border-amber/16 flex-row-reverse text-right"
               )}
               initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: index * 0.035 }}
             >
               <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", isOld ? "bg-cyan" : "bg-amber")} />
@@ -229,8 +240,8 @@ function ComparisonPanel({
             </motion.li>
           ))}
         </ul>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -577,6 +588,514 @@ function TariffVisual() {
             ))}
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function GrandMacroVisual() {
+  const [lens, setLens] = useState<"gdp" | "statecraft">("gdp");
+  const isStatecraft = lens === "statecraft";
+  const marketMeasures = [
+    { label: "GDP growth", value: 72 },
+    { label: "Consumer spending", value: 88 },
+    { label: "Trade efficiency", value: 84 },
+    { label: "Low-cost imports", value: 78 },
+    { label: "Asset prices", value: 66 },
+    { label: "Services economy", value: 81 }
+  ];
+  const strategicMeasures = [
+    { label: "Industrial base", value: 80, icon: Factory },
+    { label: "Energy security", value: 73, icon: Waves },
+    { label: "Chip capacity", value: 86, icon: Cpu },
+    { label: "Defense production", value: 82, icon: ShieldAlert },
+    { label: "Shipping control", value: 65, icon: Ship },
+    { label: "Food security", value: 62, icon: Leaf },
+    { label: "Critical minerals", value: 89, icon: Gem },
+    { label: "Currency power", value: 76, icon: Banknote }
+  ];
+  const oldModel = ["Rates", "GDP", "Inflation", "Markets"];
+  const newModel = ["Security", "Industry", "Energy", "Trade blocs", "Currency power", "Markets"];
+
+  return (
+    <div className="space-y-5">
+      <div className="relative overflow-hidden rounded-lg border border-line bg-[#080b0d] p-5 md:p-6">
+        <div className="absolute inset-0 cinematic-grid opacity-18" />
+        <motion.div
+          className={cn(
+            "absolute inset-0 transition-colors duration-700",
+            isStatecraft
+              ? "bg-[radial-gradient(circle_at_88%_14%,rgba(242,184,75,.11),transparent_34%),radial-gradient(circle_at_14%_84%,rgba(239,107,92,.06),transparent_32%)]"
+              : "bg-[radial-gradient(circle_at_18%_12%,rgba(96,213,220,.11),transparent_34%)]"
+          )}
+        />
+
+        <div className="relative">
+          <div className="mb-7 flex flex-col justify-between gap-5 md:flex-row md:items-start">
+            <div className="max-w-sm">
+              <p className={cn("micro-label", isStatecraft ? "text-amber/85" : "text-cyan/85")}>
+                {isStatecraft ? "Strategic capacity" : "Market performance"}
+              </p>
+              <h3 className="module-title mt-4 text-paper">
+                {isStatecraft ? "Statecraft lens" : "GDP lens"}
+              </h3>
+              <p className="mt-4 text-sm leading-6 text-paper/68">
+                {isStatecraft
+                  ? "Power is measured in resilience: the capacity to supply, withstand, mobilize, and control."
+                  : "Success is measured through growth, efficiency, cheaper consumption, and expanding markets."}
+              </p>
+            </div>
+
+            <div
+              className="grid shrink-0 grid-cols-2 rounded-md border border-paper/10 bg-black/28 p-1"
+              role="tablist"
+              aria-label="Measurement lens"
+            >
+              {[
+                { id: "gdp" as const, label: "GDP lens", icon: BarChart3 },
+                { id: "statecraft" as const, label: "Statecraft lens", icon: ShieldAlert }
+              ].map((option) => {
+                const Icon = option.icon;
+                const selected = lens === option.id;
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    onClick={() => setLens(option.id)}
+                    className={cn(
+                      "flex min-h-11 items-center gap-2 rounded px-3.5 text-xs transition md:text-sm",
+                      selected
+                        ? option.id === "gdp"
+                          ? "bg-cyan/10 text-cyan"
+                          : "bg-amber/10 text-amber"
+                        : "text-muted hover:text-paper"
+                    )}
+                  >
+                    <Icon size={15} />
+                    {option.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <AnimatePresence mode="wait">
+            {isStatecraft ? (
+              <motion.div
+                key="statecraft"
+                role="tabpanel"
+                className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {strategicMeasures.map((measure, index) => {
+                  const Icon = measure.icon;
+                  return (
+                    <motion.div
+                      key={measure.label}
+                      className="relative min-h-28 overflow-hidden rounded-md border border-amber/16 bg-black/22 p-3.5"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.36, delay: index * 0.03 }}
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <Icon size={16} className="text-amber" />
+                        <span className="font-mono text-[10px] text-paper/40">capacity</span>
+                      </div>
+                      <p className="mt-5 text-xs font-medium text-paper/86">{measure.label}</p>
+                      <div className="mt-3 h-px bg-paper/8">
+                        <motion.div
+                          className="h-px bg-amber"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${measure.value}%` }}
+                          transition={{ duration: 0.65, delay: 0.08 + index * 0.025 }}
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="gdp"
+                role="tabpanel"
+                className="rounded-md border border-cyan/14 bg-black/22 p-4 md:p-5"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="mb-5 flex items-center justify-between gap-4">
+                  <span className="micro-label text-cyan/75">Aggregate performance indicators</span>
+                  <span className="font-mono text-[10px] text-paper/42">Conceptual model</span>
+                </div>
+                <div className="grid min-h-52 grid-cols-6 items-end gap-2 sm:gap-4">
+                  {marketMeasures.map((measure, index) => (
+                    <div key={measure.label} className="flex min-w-0 flex-col justify-end">
+                      <motion.div
+                        className="relative mx-auto w-full max-w-14 rounded-t-sm border border-b-0 border-cyan/18 bg-cyan/[.14]"
+                        initial={{ height: 0 }}
+                        animate={{ height: `${measure.value * 1.45}px` }}
+                        transition={{ duration: 0.62, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <div className="absolute inset-x-0 top-0 h-px bg-cyan" />
+                      </motion.div>
+                      <p className="mt-3 text-center text-[10px] leading-4 text-muted sm:text-xs">{measure.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden rounded-lg border border-line bg-black/24 p-5 md:p-6">
+        <div className="absolute inset-0 cinematic-grid opacity-15" />
+        <div className="relative">
+          <div className="mb-6">
+            <p className="micro-label text-amber/82">From macro strategy to grand macro strategy</p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-paper/65">
+              Markets remain the outcome. The chain of causes now begins with security and productive power.
+            </p>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]">
+            <StrategyChain title="Old model" nodes={oldModel} tone="old" />
+            <StrategyChain title="New model" nodes={newModel} tone="new" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StrategyChain({
+  title,
+  nodes,
+  tone
+}: {
+  title: string;
+  nodes: string[];
+  tone: "old" | "new";
+}) {
+  const isNew = tone === "new";
+
+  return (
+    <div
+      className={cn(
+        "rounded-md border p-4",
+        isNew ? "border-amber/18 bg-amber/[.035]" : "border-cyan/14 bg-cyan/[.025]"
+      )}
+    >
+      <p className={cn("micro-label mb-4", isNew ? "text-amber/80" : "text-cyan/76")}>{title}</p>
+      <div className="flex flex-wrap items-center gap-2">
+        {nodes.map((node, index) => (
+          <div key={node} className="flex items-center gap-2">
+            <motion.span
+              className={cn(
+                "rounded border px-2.5 py-2 text-xs text-paper/80 md:text-sm",
+                isNew ? "border-amber/18 bg-amber/[.045]" : "border-cyan/14 bg-black/18"
+              )}
+              initial={{ opacity: 0, x: -8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: index * 0.05 }}
+            >
+              {node}
+            </motion.span>
+            {index < nodes.length - 1 ? (
+              <span className={cn("font-mono text-xs", isNew ? "text-amber/60" : "text-cyan/50")} aria-hidden="true">
+                -&gt;
+              </span>
+            ) : null}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DigitalDollarVisual() {
+  const [narrative, setNarrative] = useState<"dedollar" | "stablecoin">("stablecoin");
+  const [stress, setStress] = useState([44, 38, 22, 31, 28]);
+  const isStablecoin = narrative === "stablecoin";
+  const narrativeModes = {
+    dedollar: {
+      label: "De-dollarization narrative",
+      eyebrow: "State-led challenge",
+      thesis:
+        "States seek room to transact beyond Washington's reach through reserve diversification, bilateral settlement, and parallel payment infrastructure.",
+      points: [
+        "BRICS currency talk",
+        "Local currency trade",
+        "Gold accumulation",
+        "Alternative payment rails",
+        "Sanctions backlash"
+      ]
+    },
+    stablecoin: {
+      label: "Stablecoin re-dollarization",
+      eyebrow: "Bottom-up adoption",
+      thesis:
+        "While capitals debate alternatives, users confronting weak currencies can acquire digital dollars directly, strengthening the dollar's practical network.",
+      points: [
+        "USD stablecoins",
+        "Global digital dollar access",
+        "Demand from emerging markets",
+        "Treasury reserve backing",
+        "Dollar network effects",
+        "Crisis demand for dollars"
+      ]
+    }
+  };
+  const selectedMode = narrativeModes[narrative];
+  const stressInputs = [
+    { label: "Local inflation", icon: TrendingUp },
+    { label: "Currency volatility", icon: Waves },
+    { label: "Capital controls", icon: LockKeyhole },
+    { label: "Banking distrust", icon: Landmark },
+    { label: "Geopolitical crisis", icon: ShieldAlert }
+  ];
+  const stressLevel = Math.round(stress.reduce((sum, value) => sum + value, 0) / stress.length);
+  const stablecoinPull = Math.min(96, Math.round(18 + stressLevel * 0.78));
+  const localCurrencyHold = Math.max(8, 100 - stablecoinPull);
+  const stressPosture =
+    stablecoinPull < 43 ? "Local currency preference" : stablecoinPull < 70 ? "Dollar migration" : "Digital dollar flight";
+  const flow = [
+    { title: "Local currency weakness", icon: TrendingDown },
+    { title: "User buys USD stablecoin", icon: WalletCards },
+    { title: "Issuer holds dollar reserves", icon: CircleDollarSign },
+    { title: "Treasury and cash-like markets", icon: Landmark },
+    { title: "More global dollar demand", icon: Globe2 }
+  ];
+
+  const setStressValue = (index: number, value: number) => {
+    setStress((current) => current.map((item, itemIndex) => (itemIndex === index ? value : item)));
+  };
+
+  return (
+    <div className="space-y-5">
+      <div className="relative overflow-hidden rounded-lg border border-line bg-[#080b0d] p-5 md:p-6">
+        <div className="absolute inset-0 cinematic-grid opacity-18" />
+        <div
+          className={cn(
+            "absolute inset-0 transition duration-700",
+            isStablecoin
+              ? "bg-[radial-gradient(circle_at_88%_18%,rgba(242,184,75,.12),transparent_34%),radial-gradient(circle_at_16%_80%,rgba(96,213,220,.06),transparent_30%)]"
+              : "bg-[radial-gradient(circle_at_16%_16%,rgba(96,213,220,.10),transparent_32%)]"
+          )}
+        />
+
+        <div className="relative">
+          <div className="mb-7 flex flex-col justify-between gap-5 xl:flex-row xl:items-start">
+            <div className="max-w-sm">
+              <p className={cn("micro-label", isStablecoin ? "text-amber/82" : "text-cyan/78")}>
+                {selectedMode.eyebrow}
+              </p>
+              <h3 className="module-title mt-4 text-paper">{selectedMode.label}</h3>
+            </div>
+
+            <div
+              className="grid max-w-md grid-cols-2 rounded-md border border-paper/10 bg-black/30 p-1"
+              role="tablist"
+              aria-label="Dollar narrative"
+            >
+              {[
+                { id: "dedollar" as const, title: "De-dollarization" },
+                { id: "stablecoin" as const, title: "Stablecoin re-dollarization" }
+              ].map((mode) => (
+                <button
+                  key={mode.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={narrative === mode.id}
+                  onClick={() => setNarrative(mode.id)}
+                  className={cn(
+                    "min-h-12 rounded px-3 text-xs leading-5 transition md:text-sm",
+                    narrative === mode.id
+                      ? mode.id === "stablecoin"
+                        ? "bg-amber/10 text-amber"
+                        : "bg-cyan/10 text-cyan"
+                      : "text-muted hover:text-paper"
+                  )}
+                >
+                  {mode.title}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={narrative}
+              role="tabpanel"
+              className="grid gap-5 lg:grid-cols-[0.98fr_1.02fr]"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <p className="rounded-md border border-paper/10 bg-black/20 p-4 text-sm leading-7 text-paper/74 md:p-5">
+                {selectedMode.thesis}
+              </p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {selectedMode.points.map((point, index) => (
+                  <motion.div
+                    key={point}
+                    className={cn(
+                      "flex min-h-12 items-center gap-3 rounded-md border bg-black/20 px-3 py-2 text-sm text-paper/82",
+                      isStablecoin ? "border-amber/18" : "border-cyan/16"
+                    )}
+                    initial={{ opacity: 0, x: 8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.32, delay: index * 0.035 }}
+                  >
+                    <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", isStablecoin ? "bg-amber" : "bg-cyan")} />
+                    {point}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="mt-6 border-l border-amber/35 pl-4">
+            <p className="font-serif text-xl leading-snug text-paper md:text-2xl">
+              The dollar did not disappear. It found new rails.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden rounded-lg border border-line bg-black/24 p-5 md:p-6">
+        <div className="absolute inset-0 cinematic-grid opacity-15" />
+        <div className="relative">
+          <div className="mb-6">
+            <p className="micro-label text-amber/82">Dollar transmission mechanism</p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-paper/66">
+              Monetary fragmentation at the state level can coexist with dollar adoption from below.
+            </p>
+          </div>
+
+          <div className="grid gap-2 md:grid-cols-5">
+            {flow.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <motion.div
+                  key={step.title}
+                  className="relative flex min-h-24 items-center gap-3 rounded-md border border-paper/10 bg-white/[.025] p-3 md:flex-col md:items-start md:justify-between"
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.38, delay: index * 0.06 }}
+                >
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded border border-amber/20 bg-amber/[.07] text-amber">
+                    <Icon size={15} />
+                  </span>
+                  <p className="text-xs leading-5 text-paper/82">{step.title}</p>
+                  {index < flow.length - 1 ? (
+                    <span className="absolute -bottom-4 left-1/2 z-10 -translate-x-1/2 text-amber/60 md:-right-4 md:bottom-auto md:left-auto md:top-1/2 md:translate-x-0 md:-translate-y-1/2">
+                      <ArrowRight className="rotate-90 md:rotate-0" size={15} />
+                    </span>
+                  ) : null}
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <div className="mt-5 flex items-start gap-3 rounded-md border border-amber/16 bg-amber/[.035] p-4">
+            <Coins className="mt-0.5 shrink-0 text-amber" size={17} />
+            <p className="text-sm leading-6 text-paper/68">
+              Stablecoin issuers commonly back dollar tokens with cash-like dollar assets and Treasury instruments. More
+              adoption can therefore reinforce demand for dollar assets rather than dilute it.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden rounded-lg border border-line bg-[#080b0d] p-5 md:p-6">
+        <div className="absolute inset-0 cinematic-grid opacity-16" />
+        <div className="relative grid gap-7 lg:grid-cols-[1fr_0.88fr]">
+          <div>
+            <div className="mb-6">
+              <p className="micro-label text-amber/82">Dollar stress meter</p>
+              <h3 className="mt-4 font-serif text-3xl leading-tight text-paper">Pressure creates demand</h3>
+            </div>
+            <div className="space-y-4">
+              {stressInputs.map((input, index) => {
+                const Icon = input.icon;
+                return (
+                  <label key={input.label} className="block rounded-md border border-paper/8 bg-black/18 px-4 py-3">
+                    <span className="mb-2 flex items-center justify-between gap-4">
+                      <span className="flex items-center gap-2 text-sm text-paper/78">
+                        <Icon size={14} className="text-muted" />
+                        {input.label}
+                      </span>
+                      <span className="font-mono text-xs text-amber">{stress[index]}</span>
+                    </span>
+                    <input
+                      aria-label={input.label}
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={stress[index]}
+                      onChange={(event) => setStressValue(index, Number(event.target.value))}
+                      className="tariff-range"
+                    />
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-between rounded-md border border-amber/16 bg-amber/[.035] p-5">
+            <div>
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="micro-label text-amber/82">Demand posture</p>
+                  <p className="mt-4 font-serif text-3xl leading-tight text-paper">{stressPosture}</p>
+                </div>
+                <CircleDollarSign className="text-amber" size={29} />
+              </div>
+              <p className="mt-4 text-sm leading-6 text-paper/65">
+                As confidence in local stores of value erodes, direct access to a dollar token becomes more attractive.
+              </p>
+            </div>
+
+            <div className="mt-8 space-y-5">
+              <DemandBar label="USD stablecoin demand" value={stablecoinPull} tone="dollar" />
+              <DemandBar label="Local currency preference" value={localCurrencyHold} tone="local" />
+              <div className="rounded border border-paper/10 bg-black/22 p-3">
+                <p className="micro-label mb-2">Reading</p>
+                <p className="text-xs leading-5 text-muted">
+                  Conceptual response only. The meter visualizes direction of pressure, not a forecast or live market data.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DemandBar({ label, value, tone }: { label: string; value: number; tone: "dollar" | "local" }) {
+  return (
+    <div>
+      <div className="mb-2 flex items-center justify-between gap-3">
+        <span className="text-xs text-paper/72">{label}</span>
+        <span className={cn("font-mono text-xs", tone === "dollar" ? "text-amber" : "text-cyan")}>{value}</span>
+      </div>
+      <div className="h-2 overflow-hidden rounded-full bg-white/8">
+        <motion.div
+          className={cn("h-full rounded-full", tone === "dollar" ? "bg-amber" : "bg-cyan/60")}
+          animate={{ width: `${value}%` }}
+          transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+        />
       </div>
     </div>
   );

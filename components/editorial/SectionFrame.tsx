@@ -40,6 +40,20 @@ const sectionNarrative: Record<string, { label: string; heading: string; intro: 
       "The old order separated markets from strategy. The new order treats chips, capital, energy, minerals, cloud, finance, and procurement as instruments of national power.",
     note: "This section follows the logic of economic statecraft: the state does not merely regulate markets; it weaponizes access, capital, and capacity."
   },
+  "gdp-is-not-the-world": {
+    label: "Grand macro strategy",
+    heading: "GDP is not the world",
+    intro:
+      "Growth statistics can describe an economy while missing the power that sustains it. When security dictates trade, what matters is not merely what a nation consumes, but what it can produce, power, defend, and deny.",
+    note: "Switch lenses to see how markets-first analysis gives way to the accounting of strategic capacity."
+  },
+  "digital-dollar": {
+    label: "Monetary power",
+    heading: "The dollar did not die. It went digital.",
+    intro:
+      "A fragmented world does not necessarily produce a post-dollar world. Rival states can seek alternative rails while households, firms, and savers under pressure reach directly for digital dollars.",
+    note: "Toggle the monetary narrative and increase local stress to see why dollar power may migrate onto new rails rather than vanish."
+  },
   reindustrialization: {
     label: "Industrial base",
     heading: "Reindustrialization of America",
@@ -95,9 +109,11 @@ export function SectionFrame({
   return (
     <section
       id={id}
-      className="editorial-container grid min-h-screen gap-10 border-t border-paper/8 py-24 md:py-32 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-center"
+      className={`editorial-container grid min-h-screen gap-10 border-t border-paper/8 py-24 md:py-32 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] ${
+        id === "digital-dollar" ? "lg:items-start" : "lg:items-center"
+      }`}
     >
-      <MotionReveal>
+      <MotionReveal className={id === "digital-dollar" ? "lg:sticky lg:top-24" : undefined}>
         <div className="max-w-lg">
           <div className="mb-8 flex items-center gap-3">
             <span className="grid h-11 w-11 place-items-center rounded-md border border-line bg-white/[.035] text-cyan">
